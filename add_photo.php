@@ -60,7 +60,7 @@ include "config/connection.php"
             $photo_id_post = $_POST['photo_id_post'];
             $photo_title = $_POST['photo_title'];
             $photo_file = $_FILES['photo_file']['name'];
-            $target_dir = "uploads/";
+            $target_dir = "assets/images/";
             $target_file = $target_dir . basename($photo_file);
 
             if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
