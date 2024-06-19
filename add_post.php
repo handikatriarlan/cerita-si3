@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
                 <label for="post_date">Date:</label>
                 <input type="date" id="post_date" name="post_date" required>
                 <label for="photo_file">Upload Photos:</label>
-                <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png, image/jpeg" multiple>
+                <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png, image/jpeg">
                 <label for="photo_title">Photo Title:</label>
                 <input type="text" id="photo_title" name="photo_title" required>
                 <input type="submit" name="submit" value="Add Post">
