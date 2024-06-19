@@ -55,7 +55,7 @@ if (isset($_GET['delete'])) {
             <table class="category-table">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Category Name</th>
                         <th>Category Description</th>
                         <th>Actions</th>

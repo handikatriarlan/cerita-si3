@@ -54,7 +54,7 @@ $result = $conn->query($sql);
             <table>
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>No.</th>
                         <th>Nama Album</th>
                         <th>Aksi</th>
                     </tr>
