@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO tb_album (album_id_photo, album_title) VALUES ('$album_id_photo', '$album_title')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New album created successfully";
+        header("Location: album.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO tb_category (cat_name, cat_text) VALUES ('$cat_name', '$cat_text')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New category created successfully";
+        header("Location: category.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

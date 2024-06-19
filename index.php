@@ -48,7 +48,7 @@ include "config/connection.php";
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='post'>";
-                    echo "<h3><a href='show.php?post_id=" . $row['post_id'] . "'>" . $row['post_title'] . "</a></h3>";
+                    echo "<h3><a href='detail_post.php?post_id=" . $row['post_id'] . "'>" . $row['post_title'] . "</a></h3>";
                     echo "<p>" . substr($row['post_text'], 0, 100) . "...</p>";
                     echo "<p><strong>Date: </strong>" . $row['post_date'] . "</p>";
                     echo "</div>";

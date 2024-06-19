@@ -20,12 +20,12 @@ if (isset($_POST['submit'])) {
         $sql = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$photo_id_post', '$photo_title', '$photo_file')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New photo added successfully";
+            header("Location: photos.php");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "Terjadi Error saat Proses Mengupload File.";
     }
 }
 ?>

@@ -7,19 +7,22 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
-if (isset($_POST['submit'])) {
-    $post_id_cat = $_POST['post_id_cat'];
-    $post_slug = $_POST['post_slug'];
-    $post_title = $_POST['post_title'];
-    $post_text = $_POST['post_text'];
-    $post_date = $_POST['post_date'];
-
-    $sql = "INSERT INTO tb_post (post_id_cat, post_slug, post_title, post_text, post_date) VALUES ('$post_id_cat', '$post_slug', '$post_title', '$post_text', '$post_date')";
-
+if (isset($_GET['delete'])) {
+    $post_id = $_GET['delete'];
+    $sql = "DELETE FROM tb_post WHERE post_id = $post_id";
     if ($conn->query($sql) === TRUE) {
-        echo "New post created successfully";
+        $message = "Post deleted successfully";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $message = "Error deleting post: " . $conn->error;
+    }
+}
+
+$sql = "SELECT tb_post.*, tb_category.cat_name FROM tb_post JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id";
+$result = $conn->query($sql);
+$posts = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $posts[] = $row;
     }
 }
 ?>
@@ -55,33 +58,48 @@ if (isset($_POST['submit'])) {
 
     <main>
         <div class="container">
-            <h2>Add Post</h2>
-            <form method="POST" action="">
-                <label for="post_id_cat">Category:</label>
-                <select id="post_id_cat" name="post_id_cat" required>
+            <h2>Daftar Postingan</h2>
+            <?php if (isset($message)) { ?>
+                <p style="color: green;"><?php echo $message; ?></p>
+            <?php } ?>
+            <a href="add_post.php" class="button">Tambah Postingan</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kategori</th>
+                        <th>Slug</th>
+                        <th>Judul</th>
+                        <th>Teks</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php
-                    $sql = "SELECT * FROM tb_category";
-                    $result = $conn->query($sql);
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_name'] . "</option>";
+                    if (!empty($posts)) {
+                        $number = 1;
+                        foreach ($posts as $row) {
+                            $formatted_date = date("d-m-Y", strtotime($row['post_date']));
+                            echo "<tr>
+                                <td>" . $number++ . ".</td>
+                                <td>{$row['cat_name']}</td>
+                                <td>{$row['post_slug']}</td>
+                                <td>{$row['post_title']}</td>
+                                <td>{$row['post_text']}</td>
+                                <td>{$formatted_date}</td>
+                                <td>
+                                    <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
+                                    <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Are you sure you want to delete this post?\")'>Hapus</a>
+                                </td>
+                            </tr>";
                         }
                     } else {
-                        echo "<option>No categories available</option>";
+                        echo "<tr><td colspan='7'>No posts found</td></tr>";
                     }
                     ?>
-                </select>
-                <label for="post_slug">Slug:</label>
-                <input type="text" id="post_slug" name="post_slug" required>
-                <label for="post_title">Title:</label>
-                <input type="text" id="post_title" name="post_title" required>
-                <label for="post_text">Text:</label>
-                <textarea id="post_text" name="post_text" required></textarea>
-                <label for="post_date">Date:</label>
-                <input type="date" id="post_date" name="post_date" required>
-                <input type="submit" name="submit" value="Add Post">
-            </form>
+                </tbody>
+            </table>
         </div>
     </main>
 
