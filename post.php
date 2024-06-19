@@ -11,9 +11,7 @@ if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
     $sql_delete = "DELETE FROM tb_post WHERE post_id = $post_id";
     if ($conn->query($sql_delete) === TRUE) {
-        $message = "Post deleted successfully";
-    } else {
-        $message = "Error deleting post: " . $conn->error;
+        header("Location: post.php");
     }
 }
 

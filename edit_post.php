@@ -38,8 +38,6 @@ if (isset($_POST['update_post'])) {
                         WHERE post_id = $post_id";
 
     if ($conn->query($sql_update_post) === TRUE) {
-        $message = "Post updated successfully";
-
         $photo_title = $_POST['photo_title'];
         if (!empty($_FILES['photo_file']['name'])) {
             $target_dir = "assets/images/";
@@ -49,23 +47,13 @@ if (isset($_POST['update_post'])) {
             if ($uploadOk == 1) {
                 if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
                     $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title', photo_file = '$target_file' WHERE photo_id_post = $post_id";
-                    if ($conn->query($sql_update_photo) !== TRUE) {
-                        $error_message = "Error updating photo: " . $conn->error;
-                    }
-                } else {
-                    $error_message = "Sorry, there was an error uploading your file.";
                 }
             }
         } else {
             $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title' WHERE photo_id_post = $post_id";
-            if ($conn->query($sql_update_photo) !== TRUE) {
-                $error_message = "Error updating photo: " . $conn->error;
-            }
         }
 
-        header("Location: post.php?message=$message");
-    } else {
-        $error_message = "Error updating post: " . $conn->error;
+        header("Location: post.php");
     }
 }
 ?>
@@ -101,9 +89,6 @@ if (isset($_POST['update_post'])) {
     <main>
         <div class="container">
             <h2>Edit Postingan</h2>
-            <?php if (isset($error_message)) { ?>
-                <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
-            <?php } ?>
             <form method="POST" action="" enctype="multipart/form-data">
                 <label for="post_id_cat">Category:</label>
                 <select id="post_id_cat" name="post_id_cat" required>

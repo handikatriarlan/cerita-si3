@@ -11,7 +11,7 @@ if (isset($_GET['delete'])) {
     $album_id = $_GET['delete'];
     $sql_delete = "DELETE FROM tb_album WHERE album_id = $album_id";
     if ($conn->query($sql_delete) === TRUE) {
-        $message = "Album deleted successfully";
+        header("Location: album.php");
     }
 }
 
