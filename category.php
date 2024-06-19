@@ -70,7 +70,7 @@ if (isset($_GET['delete'])) {
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>
-                                <td>{$number}</td>
+                                <td>{$number}.</td>
                                 <td>{$row['cat_name']}</td>
                                 <td>{$row['cat_text']}</td>
                                 <td>
