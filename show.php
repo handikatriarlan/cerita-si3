@@ -47,7 +47,7 @@ include "config/connection.php";
 
                     if ($photo_result->num_rows > 0) {
                         echo "<h3>Photos:</h3>";
-                        echo "<div class='photo-grid'>"; // Tambahkan div dengan kelas 'photo-grid'
+                        echo "<div class='photo-grid'>";
                         while ($photo = $photo_result->fetch_assoc()) {
                             echo "<div class='photo'>";
                             echo "<h4>" . $photo['photo_title'] . "</h4>";

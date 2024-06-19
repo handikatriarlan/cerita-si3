@@ -22,8 +22,7 @@ include "config/connection.php"
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="add_story.php">Tambah Cerita</a></li>
-                    <li><a href="login.php">Masuk</a></li>
-                    <li><a href="register.php">Daftar</a></li>
+                    <li><a href="logout.php">Keluar</a></li>
                 </ul>
             </nav>
         </div>
