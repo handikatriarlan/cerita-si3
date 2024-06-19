@@ -30,7 +30,7 @@ include "config/connection.php"
         </div>
     </header>
 
-    <section class="container">
+    <main class="container">
         <h2>Add Category</h2>
         <form method="POST" action="">
             <label for="cat_name">Category Name:</label>
@@ -54,7 +54,7 @@ include "config/connection.php"
             }
         }
         ?>
-    </section>
+    </main>
 
     <footer>
         <p>Cerita SI-3 &copy; 2024</p>

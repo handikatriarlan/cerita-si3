@@ -21,16 +21,15 @@ include "config/connection.php"
             <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="add_category.php">Add Category</a></li>
-                    <li><a href="add_post.php">Add Post</a></li>
-                    <li><a href="add_photo.php">Add Photo</a></li>
-                    <li><a href="add_album.php">Add Album</a></li>
+                    <li><a href="add_story.php">Tambah Cerita</a></li>
+                    <li><a href="login.php">Masuk</a></li>
+                    <li><a href="register.php">Daftar</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="container">
+    <main class="container">
         <h2>Kegiatan Kelas SI-3</h2>
         <?php
         $sql = "SELECT * FROM tb_post";
@@ -48,7 +47,7 @@ include "config/connection.php"
             echo "No activities found.";
         }
         ?>
-    </section>
+    </main>
 
     <footer>
         <p>Cerita SI-3 &copy; 2024</p>

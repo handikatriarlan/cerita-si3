@@ -19,8 +19,7 @@ body {
 header {
     background: #333;
     color: #fff;
-    padding-top: 30px;
-    min-height: 70px;
+    padding: 20px 0;
     border-bottom: #0779e4 3px solid;
 }
 
@@ -29,6 +28,7 @@ header a {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 16px;
+    cursor: pointer;
 }
 
 header ul {
@@ -38,7 +38,7 @@ header ul {
 
 header li {
     display: inline;
-    padding: 0 20px 0 20px;
+    padding: 0 20px;
 }
 
 header #branding {
@@ -62,32 +62,58 @@ header nav {
 
 main.container {
     flex: 1;
+    padding: 20px;
 }
 
 footer {
     background: #333;
     color: #fff;
     text-align: center;
-    padding: 8px 0 2px;
-    margin-top: 30px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    padding: 10px 0;
+    margin-top: auto;
 }
 
-.post,
-.photo {
+.form-section {
     background: #fff;
     padding: 20px;
-    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.post h3 a {
-    color: #333;
-    text-decoration: none;
+.form-section h2 {
+    margin-top: 0;
 }
 
-.photo img {
-    max-width: 100%;
-    height: auto;
+.form-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section label {
+    margin: 10px 0 5px;
+}
+
+.form-section input[type="text"],
+.form-section input[type="date"],
+.form-section input[type="file"],
+.form-section textarea,
+.form-section select {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-section input[type="submit"] {
+    padding: 10px;
+    background: #0779e4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-section input[type="submit"]:hover {
+    background: #055bb5;
 }

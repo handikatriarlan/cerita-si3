@@ -1,5 +1,5 @@
 <?php
-include "config/connection.php"
+include "config/connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,57 +14,59 @@ include "config/connection.php"
 
 <body>
     <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Cerita SI-3</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="add_category.php">Add Category</a></li>
-                    <li><a href="add_post.php">Add Post</a></li>
-                    <li><a href="add_photo.php">Add Photo</a></li>
-                    <li><a href="add_album.php">Add Album</a></li>
-                </ul>
-            </nav>
+        <div id="branding">
+            <h1>Cerita SI-3</h1>
         </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="add_category.php">Add Category</a></li>
+                <li><a href="add_post.php">Add Post</a></li>
+                <li><a href="add_photo.php">Add Photo</a></li>
+                <li><a href="add_album.php">Add Album</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section class="container">
-        <?php
-        if (isset($_GET['post_id'])) {
-            $post_id = $_GET['post_id'];
-            $sql = "SELECT * FROM tb_post WHERE post_id='$post_id'";
-            $result = $conn->query($sql);
+    <main>
+        <div class="container">
+            <?php
+            if (isset($_GET['post_id'])) {
+                $post_id = $_GET['post_id'];
+                $sql = "SELECT * FROM tb_post WHERE post_id='$post_id'";
+                $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                $post = $result->fetch_assoc();
-                echo "<h2>" . $post['post_title'] . "</h2>";
-                echo "<p><strong>Date: </strong>" . $post['post_date'] . "</p>";
-                echo "<p>" . $post['post_text'] . "</p>";
+                if ($result->num_rows > 0) {
+                    $post = $result->fetch_assoc();
+                    echo "<h2>" . $post['post_title'] . "</h2>";
+                    echo "<p><strong>Date: </strong>" . $post['post_date'] . "</p>";
+                    echo "<p>" . $post['post_text'] . "</p>";
 
-                $photo_sql = "SELECT * FROM tb_photos WHERE photo_id_post='$post_id'";
-                $photo_result = $conn->query($photo_sql);
+                    $photo_sql = "SELECT * FROM tb_photos WHERE photo_id_post='$post_id'";
+                    $photo_result = $conn->query($photo_sql);
 
-                if ($photo_result->num_rows > 0) {
-                    echo "<h3>Photos:</h3>";
-                    while ($photo = $photo_result->fetch_assoc()) {
-                        echo "<div class='photo'>";
-                        echo "<h4>" . $photo['photo_title'] . "</h4>";
-                        echo "<img src='" . $photo['photo_file'] . "' alt='" . $photo['photo_title'] . "'>";
+                    if ($photo_result->num_rows > 0) {
+                        echo "<h3>Photos:</h3>";
+                        echo "<div class='photo-grid'>"; // Tambahkan div dengan kelas 'photo-grid'
+                        while ($photo = $photo_result->fetch_assoc()) {
+                            echo "<div class='photo'>";
+                            echo "<h4>" . $photo['photo_title'] . "</h4>";
+                            echo "<img src='assets/images/" . $photo['photo_file'] . "' alt='" . $photo['photo_title'] . "'>";
+                            echo "</div>";
+                        }
                         echo "</div>";
+                    } else {
+                        echo "<p>No photos available for this post.</p>";
                     }
                 } else {
-                    echo "<p>No photos available for this post.</p>";
+                    echo "No post found.";
                 }
             } else {
-                echo "No post found.";
+                echo "No post selected.";
             }
-        } else {
-            echo "No post selected.";
-        }
-        ?>
-    </section>
+            ?>
+        </div>
+    </main>
 
     <footer>
         <p>Cerita SI-3 &copy; 2024</p>

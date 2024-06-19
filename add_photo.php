@@ -30,7 +30,7 @@ include "config/connection.php"
         </div>
     </header>
 
-    <section class="container">
+    <main class="container">
         <h2>Add Photo</h2>
         <form method="POST" action="" enctype="multipart/form-data">
             <label for="photo_id_post">Post:</label>
@@ -60,11 +60,13 @@ include "config/connection.php"
             $photo_id_post = $_POST['photo_id_post'];
             $photo_title = $_POST['photo_title'];
             $photo_file = $_FILES['photo_file']['name'];
+
             $target_dir = "assets/images/";
             $target_file = $target_dir . basename($photo_file);
 
-            if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
-                $sql = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$photo_id_post', '$photo_title', '$target_file')";
+            if (move_uploaded_file($_FILES["photo_file"]["tmp_name"], $target_file)) {
+
+                $sql = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$photo_id_post', '$photo_title', '$photo_file')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "New photo added successfully";
@@ -76,7 +78,9 @@ include "config/connection.php"
             }
         }
         ?>
-    </section>
+
+
+    </main>
 
     <footer>
         <p>Cerita SI-3 &copy; 2024</p>
