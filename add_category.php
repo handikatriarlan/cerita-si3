@@ -6,7 +6,7 @@ include "config/connection.php"
 <html>
 
 <head>
-    <title>Cerita SI-3</title>
+    <title>Add Category</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
@@ -29,21 +29,27 @@ include "config/connection.php"
     </header>
 
     <section class="container">
-        <h2>Kegiatan Kelas SI-3</h2>
-        <?php
-        $sql = "SELECT * FROM pbwd_quiz_genap_tb_post";
-        $result = $conn->query($sql);
+        <h2>Add Category</h2>
+        <form method="POST" action="">
+            <label for="cat_name">Category Name:</label>
+            <input type="text" id="cat_name" name="cat_name" required>
+            <label for="cat_text">Category Description:</label>
+            <textarea id="cat_text" name="cat_text" required></textarea>
+            <input type="submit" name="submit" value="Add Category">
+        </form>
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='post'>";
-                echo "<h3><a href='view_event.php?post_id=" . $row['post_id'] . "'>" . $row['post_title'] . "</a></h3>";
-                echo "<p>" . substr($row['post_text'], 0, 100) . "...</p>";
-                echo "<p><strong>Date: </strong>" . $row['post_date'] . "</p>";
-                echo "</div>";
+        <?php
+        if (isset($_POST['submit'])) {
+            $cat_name = $_POST['cat_name'];
+            $cat_text = $_POST['cat_text'];
+
+            $sql = "INSERT INTO pbwd_quiz_genap_tb_category (cat_name, cat_text) VALUES ('$cat_name', '$cat_text')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "New category created successfully";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
             }
-        } else {
-            echo "No activities found.";
         }
         ?>
     </section>
