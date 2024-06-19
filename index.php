@@ -31,7 +31,6 @@ include "config/connection.php";
                 <li><a href="index.php">Beranda</a></li>
                 <li><a href="post.php">Postingan</a></li>
                 <li><a href="category.php">Kategori</a></li>
-                <li><a href="photos.php">Foto</a></li>
                 <li><a href="album.php">Album</a></li>
                 <li><a href="logout.php">Keluar</a></li>
             </ul>
