@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $album_id_photo = $_POST['album_id_photo'];
     $album_title = $_POST['album_title'];
 
-    $sql = "INSERT INTO pbwd_quiz_genap_tb_album (album_id_photo, album_title) VALUES ('$album_id_photo', '$album_title')";
+    $sql = "INSERT INTO tb_album (album_id_photo, album_title) VALUES ('$album_id_photo', '$album_title')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New album created successfully";
@@ -33,7 +33,6 @@ if (isset($_POST['submit'])) {
 
 <body>
     <header>
-        <div class="container">
             <div id="branding">
                 <a href="index.php">
                     <h2>Cerita SI-3</h2>
@@ -49,7 +48,6 @@ if (isset($_POST['submit'])) {
                     <li><a href="logout.php">Keluar</a></li>
                 </ul>
             </nav>
-        </div>
     </header>
 
     <main>
@@ -59,7 +57,7 @@ if (isset($_POST['submit'])) {
                 <label for="album_id_photo">Photo:</label>
                 <select id="album_id_photo" name="album_id_photo" required>
                     <?php
-                    $sql = "SELECT * FROM pbwd_quiz_genap_tb_photos";
+                    $sql = "SELECT * FROM tb_photos";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
