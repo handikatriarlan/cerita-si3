@@ -3,11 +3,13 @@ include "config/connection.php"
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cerita SI-3</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
@@ -31,7 +33,7 @@ include "config/connection.php"
     <section class="container">
         <h2>Kegiatan Kelas SI-3</h2>
         <?php
-        $sql = "SELECT * FROM pbwd_quiz_genap_tb_post";
+        $sql = "SELECT * FROM tb_post";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
