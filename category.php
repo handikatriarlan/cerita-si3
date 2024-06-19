@@ -10,8 +10,9 @@ include "config/connection.php";
 if (isset($_POST['submit'])) {
     $cat_name = $_POST['cat_name'];
     $cat_text = $_POST['cat_text'];
+    $user_id = $_SESSION['user'];
 
-    $sql = "INSERT INTO tb_category (cat_name, cat_text) VALUES ('$cat_name', '$cat_text')";
+    $sql = "INSERT INTO tb_category (cat_name, cat_text, user_id) VALUES ('$cat_name', '$cat_text', '$user_id')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: category.php");

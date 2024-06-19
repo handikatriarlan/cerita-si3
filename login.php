@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $_SESSION['user'] = $row['username'];
+        $_SESSION['user'] = $row['id'];
         header("Location: index.php");
         exit();
     } else {
