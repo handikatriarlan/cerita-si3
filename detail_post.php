@@ -1,5 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include "config/connection.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +21,21 @@ include "config/connection.php";
 
 <body>
     <header>
-        <div id="branding">
-            <h1>Cerita SI-3</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="add_category.php">Add Category</a></li>
-                <li><a href="add_post.php">Add Post</a></li>
-                <li><a href="add_photo.php">Add Photo</a></li>
-                <li><a href="add_album.php">Add Album</a></li>
-            </ul>
-        </nav>
+            <div id="branding">
+                <a href="index.php">
+                    <h2>Cerita SI-3</h2>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.php">Beranda</a></li>
+                    <li><a href="post.php">Postingan</a></li>
+                    <li><a href="category.php">Kategori</a></li>
+                    <li><a href="photos.php">Foto</a></li>
+                    <li><a href="album.php">Album</a></li>
+                    <li><a href="logout.php">Keluar</a></li>
+                </ul>
+            </nav>
     </header>
 
     <main>
@@ -69,7 +79,7 @@ include "config/connection.php";
     </main>
 
     <footer>
-        <p>Cerita SI-3 &copy; 2024</p>
+        <p>SI-3 &copy; 2024</p>
     </footer>
 </body>
 

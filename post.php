@@ -1,5 +1,27 @@
 <?php
-include "config/connection.php"
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+
+include "config/connection.php";
+
+if (isset($_POST['submit'])) {
+    $post_id_cat = $_POST['post_id_cat'];
+    $post_slug = $_POST['post_slug'];
+    $post_title = $_POST['post_title'];
+    $post_text = $_POST['post_text'];
+    $post_date = $_POST['post_date'];
+
+    $sql = "INSERT INTO tb_post (post_id_cat, post_slug, post_title, post_text, post_date) VALUES ('$post_id_cat', '$post_slug', '$post_title', '$post_text', '$post_date')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New post created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,15 +38,18 @@ include "config/connection.php"
     <header>
         <div class="container">
             <div id="branding">
-                <h1>Cerita SI-3</h1>
+                <a href="index.php">
+                    <h2>Cerita SI-3</h2>
+                </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="add_category.php">Add Category</a></li>
-                    <li><a href="add_post.php">Add Post</a></li>
-                    <li><a href="add_photo.php">Add Photo</a></li>
-                    <li><a href="add_album.php">Add Album</a></li>
+                    <li><a href="index.php">Beranda</a></li>
+                    <li><a href="post.php">Postingan</a></li>
+                    <li><a href="category.php">Kategori</a></li>
+                    <li><a href="photos.php">Foto</a></li>
+                    <li><a href="album.php">Album</a></li>
+                    <li><a href="logout.php">Keluar</a></li>
                 </ul>
             </nav>
         </div>
@@ -58,28 +83,10 @@ include "config/connection.php"
             <input type="date" id="post_date" name="post_date" required>
             <input type="submit" name="submit" value="Add Post">
         </form>
-
-        <?php
-        if (isset($_POST['submit'])) {
-            $post_id_cat = $_POST['post_id_cat'];
-            $post_slug = $_POST['post_slug'];
-            $post_title = $_POST['post_title'];
-            $post_text = $_POST['post_text'];
-            $post_date = $_POST['post_date'];
-
-            $sql = "INSERT INTO tb_post (post_id_cat, post_slug, post_title, post_text, post_date) VALUES ('$post_id_cat', '$post_slug', '$post_title', '$post_text', '$post_date')";
-
-            if ($conn->query($sql) === TRUE) {
-                echo "New post created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        }
-        ?>
     </main>
 
     <footer>
-        <p>Cerita SI-3 &copy; 2024</p>
+        <p>SI-3 &copy; 2024</p>
     </footer>
 </body>
 
