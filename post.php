@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
-// Handle deletion of post
 if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
     $sql_delete = "DELETE FROM tb_post WHERE post_id = $post_id";
@@ -18,7 +17,6 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Fetch posts with category names and photo
 $sql_select = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_file 
                FROM tb_post 
                JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id 

@@ -7,19 +7,16 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
-if (isset($_POST['submit'])) {
-    $album_id_photo = $_POST['album_id_photo'];
-    $album_title = $_POST['album_title'];
-    $user_id = $_SESSION['user'];
-
-    $sql = "INSERT INTO tb_album (album_id_photo, album_title, user_id) VALUES ('$album_id_photo', '$album_title', '$user_id')";
-
-    if ($conn->query($sql) === TRUE) {
-        header("Location: album.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+if (isset($_GET['delete'])) {
+    $album_id = $_GET['delete'];
+    $sql_delete = "DELETE FROM tb_album WHERE album_id = $album_id";
+    if ($conn->query($sql_delete) === TRUE) {
+        $message = "Album deleted successfully";
     }
 }
+
+$sql = "SELECT * FROM tb_album";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +25,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerita SI-3</title>
+    <title>Daftar Album - Cerita SI-3</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
@@ -52,27 +49,37 @@ if (isset($_POST['submit'])) {
 
     <main>
         <div class="container">
-            <h2>Add Album</h2>
-            <form method="POST" action="">
-                <label for="album_id_photo">Photo:</label>
-                <select id="album_id_photo" name="album_id_photo" required>
+            <h2>Daftar Album</h2>
+            <a href="add_album.php" class="button">Tambah Album</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Album</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php
-                    $sql = "SELECT * FROM tb_photos";
-                    $result = $conn->query($sql);
-
                     if ($result->num_rows > 0) {
+                        $number = 1;
                         while ($row = $result->fetch_assoc()) {
-                            echo "<option value='" . $row['photo_id'] . "'>" . $row['photo_title'] . "</option>";
+                            echo "<tr>
+                             <td>{$number}.</td>
+                             <td>{$row['album_title']}</td>
+                            <td>
+                                <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
+                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Are you sure you want to delete this album?\")'>Hapus</a>
+                            </td>
+                        </tr>";
+                            $number++;
                         }
                     } else {
-                        echo "<option>No photos available</option>";
+                        echo "<tr><td colspan='8'>No album found</td></tr>";
                     }
                     ?>
-                </select>
-                <label for="album_title">Title:</label>
-                <input type="text" id="album_title" name="album_title" required>
-                <input type="submit" name="submit" value="Add Album">
-            </form>
+                </tbody>
+            </table>
         </div>
     </main>
 
