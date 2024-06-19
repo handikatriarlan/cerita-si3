@@ -45,7 +45,7 @@ include "config/connection.php"
             $cat_name = $_POST['cat_name'];
             $cat_text = $_POST['cat_text'];
 
-            $sql = "INSERT INTO pbwd_quiz_genap_tb_category (cat_name, cat_text) VALUES ('$cat_name', '$cat_text')";
+            $sql = "INSERT INTO tb_category (cat_name, cat_text) VALUES ('$cat_name', '$cat_text')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New category created successfully";

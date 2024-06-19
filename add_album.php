@@ -36,7 +36,7 @@ include "config/connection.php"
             <label for="album_id_photo">Photo:</label>
             <select id="album_id_photo" name="album_id_photo" required>
                 <?php
-                $sql = "SELECT * FROM pbwd_quiz_genap_tb_photos";
+                $sql = "SELECT * FROM tb_photos";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -58,7 +58,7 @@ include "config/connection.php"
             $album_id_photo = $_POST['album_id_photo'];
             $album_title = $_POST['album_title'];
 
-            $sql = "INSERT INTO pbwd_quiz_genap_tb_album (album_id_photo, album_title) VALUES ('$album_id_photo', '$album_title')";
+            $sql = "INSERT INTO tb_album (album_id_photo, album_title) VALUES ('$album_id_photo', '$album_title')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New album created successfully";

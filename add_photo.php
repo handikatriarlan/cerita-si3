@@ -36,7 +36,7 @@ include "config/connection.php"
             <label for="photo_id_post">Post:</label>
             <select id="photo_id_post" name="photo_id_post" required>
                 <?php
-                $sql = "SELECT * FROM pbwd_quiz_genap_tb_post";
+                $sql = "SELECT * FROM tb_post";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -64,7 +64,7 @@ include "config/connection.php"
             $target_file = $target_dir . basename($photo_file);
 
             if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
-                $sql = "INSERT INTO pbwd_quiz_genap_tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$photo_id_post', '$photo_title', '$target_file')";
+                $sql = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$photo_id_post', '$photo_title', '$target_file')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "New photo added successfully";

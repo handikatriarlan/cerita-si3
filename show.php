@@ -34,7 +34,7 @@ include "config/connection.php"
         <?php
         if (isset($_GET['post_id'])) {
             $post_id = $_GET['post_id'];
-            $sql = "SELECT * FROM pbwd_quiz_genap_tb_post WHERE post_id='$post_id'";
+            $sql = "SELECT * FROM tb_post WHERE post_id='$post_id'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -43,7 +43,7 @@ include "config/connection.php"
                 echo "<p><strong>Date: </strong>" . $post['post_date'] . "</p>";
                 echo "<p>" . $post['post_text'] . "</p>";
 
-                $photo_sql = "SELECT * FROM pbwd_quiz_genap_tb_photos WHERE photo_id_post='$post_id'";
+                $photo_sql = "SELECT * FROM tb_photos WHERE photo_id_post='$post_id'";
                 $photo_result = $conn->query($photo_sql);
 
                 if ($photo_result->num_rows > 0) {

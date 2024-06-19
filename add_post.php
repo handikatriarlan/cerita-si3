@@ -36,7 +36,7 @@ include "config/connection.php"
             <label for="post_id_cat">Category:</label>
             <select id="post_id_cat" name="post_id_cat" required>
                 <?php
-                $sql = "SELECT * FROM pbwd_quiz_genap_tb_category";
+                $sql = "SELECT * FROM tb_category";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -67,7 +67,7 @@ include "config/connection.php"
             $post_text = $_POST['post_text'];
             $post_date = $_POST['post_date'];
 
-            $sql = "INSERT INTO pbwd_quiz_genap_tb_post (post_id_cat, post_slug, post_title, post_text, post_date) VALUES ('$post_id_cat', '$post_slug', '$post_title', '$post_text', '$post_date')";
+            $sql = "INSERT INTO tb_post (post_id_cat, post_slug, post_title, post_text, post_date) VALUES ('$post_id_cat', '$post_slug', '$post_title', '$post_text', '$post_date')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "New post created successfully";
