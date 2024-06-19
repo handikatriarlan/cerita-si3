@@ -7,17 +7,15 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
-if (isset($_POST['submit'])) {
-    $cat_name = $_POST['cat_name'];
-    $cat_text = $_POST['cat_text'];
-    $user_id = $_SESSION['user'];
+if (isset($_GET['delete'])) {
+    $cat_id = $_GET['delete'];
 
-    $sql = "INSERT INTO tb_category (cat_name, cat_text, user_id) VALUES ('$cat_name', '$cat_text', '$user_id')";
+    $sql = "DELETE FROM tb_category WHERE cat_id = $cat_id";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: category.php");
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error deleting record: " . $conn->error;
     }
 }
 ?>
@@ -28,7 +26,7 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerita SI-3</title>
+    <title>Category - Cerita SI-3</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
@@ -52,19 +50,47 @@ if (isset($_POST['submit'])) {
 
     <main>
         <div class="container">
-            <h2>Add Category</h2>
-            <form method="POST" action="">
-                <label for="cat_name">Category Name:</label>
-                <input type="text" id="cat_name" name="cat_name" required>
-                <label for="cat_text">Category Description:</label>
-                <textarea id="cat_text" name="cat_text" required></textarea>
-                <input type="submit" name="submit" value="Add Category">
-            </form>
+            <h2>Kategori</h2>
+            <a href="add_category.php" class="button">Tambah Kategori</a>
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Category Name</th>
+                        <th>Category Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $number = 1;
+                    $sql = "SELECT * FROM tb_category";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$number}</td>
+                                <td>{$row['cat_name']}</td>
+                                <td>{$row['cat_text']}</td>
+                                <td>
+                                    <a href='edit_category.php?id={$row['cat_id']}'>Edit</a> |
+                                    <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Are you sure you want to delete this category?\")'>Hapus</a>
+                                </td>
+                            </tr>";
+                            $number++;
+                        }
+                    } else {
+                        echo "<tr><td colspan='4'>No categories found</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </main>
 
     <footer>
-        <p>SI-3 &copy; 2024</p>
+        <p>Cerita SI-3 &copy; 2024</p>
     </footer>
 </body>
 

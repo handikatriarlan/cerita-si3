@@ -7,24 +7,24 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
+// Handle deletion of post
 if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
-    $sql = "DELETE FROM tb_post WHERE post_id = $post_id";
-    if ($conn->query($sql) === TRUE) {
+    $sql_delete = "DELETE FROM tb_post WHERE post_id = $post_id";
+    if ($conn->query($sql_delete) === TRUE) {
         $message = "Post deleted successfully";
     } else {
         $message = "Error deleting post: " . $conn->error;
     }
 }
 
-$sql = "SELECT tb_post.*, tb_category.cat_name FROM tb_post JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id";
-$result = $conn->query($sql);
-$posts = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $posts[] = $row;
-    }
-}
+// Fetch posts with category names and photo
+$sql_select = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_file 
+               FROM tb_post 
+               JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id 
+               LEFT JOIN tb_photos ON tb_post.post_id = tb_photos.photo_id_post";
+$result = $conn->query($sql_select);
+
 ?>
 
 <!DOCTYPE html>
@@ -58,14 +58,12 @@ if ($result->num_rows > 0) {
     <main>
         <div class="container">
             <h2>Daftar Postingan</h2>
-            <?php if (isset($message)) { ?>
-                <p style="color: green;"><?php echo $message; ?></p>
-            <?php } ?>
             <a href="add_post.php" class="button">Tambah Postingan</a>
             <table>
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Gambar</th>
                         <th>Kategori</th>
                         <th>Slug</th>
                         <th>Judul</th>
@@ -76,12 +74,19 @@ if ($result->num_rows > 0) {
                 </thead>
                 <tbody>
                     <?php
-                    if (!empty($posts)) {
+                    if ($result->num_rows > 0) {
                         $number = 1;
-                        foreach ($posts as $row) {
+                        while ($row = $result->fetch_assoc()) {
                             $formatted_date = date("d-m-Y", strtotime($row['post_date']));
                             echo "<tr>
-                                <td>" . $number++ . ".</td>
+                                <td>{$number}.</td>
+                                <td>";
+                            if (!empty($row['photo_file'])) {
+                                echo "<img src='assets/images/{$row['photo_file']}' style='max-width: 100px; max-height: 100px;' />";
+                            } else {
+                                echo "No Image";
+                            }
+                            echo "</td>
                                 <td>{$row['cat_name']}</td>
                                 <td>{$row['post_slug']}</td>
                                 <td>{$row['post_title']}</td>
@@ -92,9 +97,10 @@ if ($result->num_rows > 0) {
                                     <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Are you sure you want to delete this post?\")'>Hapus</a>
                                 </td>
                             </tr>";
+                            $number++;
                         }
                     } else {
-                        echo "<tr><td colspan='7'>No posts found</td></tr>";
+                        echo "<tr><td colspan='8'>No posts found</td></tr>";
                     }
                     ?>
                 </tbody>

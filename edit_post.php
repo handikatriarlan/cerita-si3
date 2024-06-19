@@ -7,10 +7,13 @@ if (!isset($_SESSION['user'])) {
 
 include "config/connection.php";
 
-// Mendapatkan data post yang akan diedit
 if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
-    $sql = "SELECT * FROM tb_post WHERE post_id = $post_id";
+    $sql = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_title, tb_photos.photo_file 
+            FROM tb_post 
+            LEFT JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id 
+            LEFT JOIN tb_photos ON tb_post.post_id = tb_photos.photo_id_post
+            WHERE tb_post.post_id = $post_id";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $post = $result->fetch_assoc();
@@ -23,7 +26,6 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Memperbarui data post
 if (isset($_POST['update_post'])) {
     $post_id_cat = $_POST['post_id_cat'];
     $post_slug = $_POST['post_slug'];
@@ -31,10 +33,37 @@ if (isset($_POST['update_post'])) {
     $post_text = $_POST['post_text'];
     $post_date = $_POST['post_date'];
 
-    $sql = "UPDATE tb_post SET post_id_cat = '$post_id_cat', post_slug = '$post_slug', post_title = '$post_title', post_text = '$post_text', post_date = '$post_date' WHERE post_id = $post_id";
+    $sql_update_post = "UPDATE tb_post 
+                        SET post_id_cat = '$post_id_cat', post_slug = '$post_slug', post_title = '$post_title', post_text = '$post_text', post_date = '$post_date' 
+                        WHERE post_id = $post_id";
 
-    if ($conn->query($sql) === TRUE) {
-        header("Location: post.php?message=Post updated successfully");
+    if ($conn->query($sql_update_post) === TRUE) {
+        $message = "Post updated successfully";
+
+        $photo_title = $_POST['photo_title'];
+        if (!empty($_FILES['photo_file']['name'])) {
+            $target_dir = "assets/images/";
+            $target_file = $target_dir . basename($_FILES['photo_file']['name']);
+            $uploadOk = 1;
+
+            if ($uploadOk == 1) {
+                if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
+                    $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title', photo_file = '$target_file' WHERE photo_id_post = $post_id";
+                    if ($conn->query($sql_update_photo) !== TRUE) {
+                        $error_message = "Error updating photo: " . $conn->error;
+                    }
+                } else {
+                    $error_message = "Sorry, there was an error uploading your file.";
+                }
+            }
+        } else {
+            $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title' WHERE photo_id_post = $post_id";
+            if ($conn->query($sql_update_photo) !== TRUE) {
+                $error_message = "Error updating photo: " . $conn->error;
+            }
+        }
+
+        header("Location: post.php?message=$message");
     } else {
         $error_message = "Error updating post: " . $conn->error;
     }
@@ -75,7 +104,7 @@ if (isset($_POST['update_post'])) {
             <?php if (isset($error_message)) { ?>
                 <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
             <?php } ?>
-            <form method="POST" action="">
+            <form method="POST" action="" enctype="multipart/form-data">
                 <label for="post_id_cat">Category:</label>
                 <select id="post_id_cat" name="post_id_cat" required>
                     <?php
@@ -99,6 +128,16 @@ if (isset($_POST['update_post'])) {
                 <textarea id="post_text" name="post_text" required><?php echo $post['post_text']; ?></textarea>
                 <label for="post_date">Date:</label>
                 <input type="date" id="post_date" name="post_date" value="<?php echo $post['post_date']; ?>" required>
+
+                <label for="photo_title">Photo Title:</label>
+                <input type="text" id="photo_title" name="photo_title" value="<?php echo $post['photo_title']; ?>" required>
+                <?php if (!empty($post['photo_file'])) { ?>
+                    <p>Current Image:</p>
+                    <img src="<?php echo "assets/images/" . $post['photo_file']; ?>" style="max-width: 200px; max-height: 200px;">
+                <?php } ?>
+                <label for="photo_file">Upload New Image:</label>
+                <input type="file" id="photo_file" name="photo_file" accept="image/jpeg, image/png, image/gif">
+
                 <input type="submit" name="update_post" value="Update Post">
             </form>
         </div>
