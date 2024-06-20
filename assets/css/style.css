@@ -1,4 +1,3 @@
-/* Reset dan global styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -61,11 +60,8 @@ header nav {
     width: 80%;
     margin: auto;
     overflow: hidden;
-}
-
-main.container {
-    flex: 1;
     padding: 20px;
+    flex: 1;
 }
 
 footer {
@@ -75,7 +71,6 @@ footer {
     padding: 10px 0;
 }
 
-/* Form section styles */
 .form-section {
     background-color: #fff;
     padding: 30px;
