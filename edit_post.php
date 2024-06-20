@@ -55,42 +55,44 @@ if (isset($_POST['update_post'])) {
 }
 ?>
 
-
-<h2>Edit Postingan</h2>
-<form method="POST" action="" enctype="multipart/form-data">
-    <label for="post_id_cat">Kategori:</label>
-    <select id="post_id_cat" name="post_id_cat" required>
-        <?php
-        $sql = "SELECT * FROM tb_category";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $selected = $row['cat_id'] == $post['post_id_cat'] ? "selected" : "";
-                echo "<option value='" . $row['cat_id'] . "' $selected>" . $row['cat_name'] . "</option>";
+<div class="form-section">
+    <h2>Edit Postingan</h2>
+    <form method="POST" action="" enctype="multipart/form-data">
+        <label for="post_id_cat">Kategori:</label>
+        <select id="post_id_cat" name="post_id_cat" required>
+            <?php
+            $sql = "SELECT * FROM tb_category";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $selected = $row['cat_id'] == $post['post_id_cat'] ? "selected" : "";
+                    echo "<option value='" . $row['cat_id'] . "' $selected>" . $row['cat_name'] . "</option>";
+                }
+            } else {
+                echo "<option>No categories available</option>";
             }
-        } else {
-            echo "<option>No categories available</option>";
-        }
-        ?>
-    </select>
-    <label for="post_slug">Slug:</label>
-    <input type="text" id="post_slug" name="post_slug" value="<?php echo $post['post_slug']; ?>" required>
-    <label for="post_title">Judul:</label>
-    <input type="text" id="post_title" name="post_title" value="<?php echo $post['post_title']; ?>" required>
-    <label for="post_text">Deskripsi:</label>
-    <textarea id="post_text" name="post_text" required><?php echo $post['post_text']; ?></textarea>
-    <label for="post_date">Tanggal:</label>
-    <input type="date" id="post_date" name="post_date" value="<?php echo $post['post_date']; ?>" required>
-    <?php if (!empty($post['photo_file'])) { ?>
-        <p>Foto saat ini:</p>
-        <img src="<?php echo "assets/images/" . $post['photo_file']; ?>" style="max-width: 200px; max-height: 200px;">
-    <?php } ?>
-    <label for="photo_file">Upload foto baru:</label>
-    <input type="file" id="photo_file" name="photo_file" accept="image/jpeg, image/png, image/gif">
-    <label for="photo_title">Judul Foto:</label>
-    <input type="text" id="photo_title" name="photo_title" value="<?php echo $post['photo_title']; ?>" required>
-    <input type="submit" name="update_post" value="Perbarui">
-</form>
+            ?>
+        </select>
+        <label for="post_slug">Slug:</label>
+        <input type="text" id="post_slug" name="post_slug" value="<?php echo $post['post_slug']; ?>" required>
+        <label for="post_title">Judul:</label>
+        <input type="text" id="post_title" name="post_title" value="<?php echo $post['post_title']; ?>" required>
+        <label for="post_text">Deskripsi:</label>
+        <textarea id="post_text" name="post_text" required><?php echo $post['post_text']; ?></textarea>
+        <label for="post_date">Tanggal:</label>
+        <input type="date" id="post_date" name="post_date" value="<?php echo $post['post_date']; ?>" required>
+        <?php if (!empty($post['photo_file'])) { ?>
+            <p>Foto saat ini:</p>
+            <img src="<?php echo "assets/images/" . $post['photo_file']; ?>" style="max-width: 200px; max-height: 200px;">
+        <?php } ?>
+        <br>
+        <label for="photo_file">Upload foto baru:</label>
+        <input type="file" id="photo_file" name="photo_file" accept="image/jpeg, image/png, image/gif">
+        <label for="photo_title">Judul Foto:</label>
+        <input type="text" id="photo_title" name="photo_title" value="<?php echo $post['photo_title']; ?>" required>
+        <input type="submit" name="update_post" value="Perbarui">
+    </form>
+</div>
 
 <?php
 $content = ob_get_clean();

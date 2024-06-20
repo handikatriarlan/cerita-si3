@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
         echo "</div>";
     }
 } else {
-    echo "Tidak ada kegiatan yang ditemukan.";
+    echo "No activities found.";
 }
 
 $content = ob_get_clean();

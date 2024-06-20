@@ -53,8 +53,10 @@ $result = $conn->query($sql);
                 }
                 echo   "</td>
                         <td>
-                        <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
-                            <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
+                        <a class='button-edit' href='edit_album.php?id={$row['album_id']}'>Edit</a>
+                        <br>
+                        <br>
+                        <a class='button-delete' href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
                         </td>
                         </tr>";
                 $number++;

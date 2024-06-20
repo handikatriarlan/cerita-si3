@@ -116,8 +116,14 @@ footer {
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
-    resize: none;
 }
+
+.form-section textarea {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    resize: none;
+    height: 200px;
+}
+
 
 .form-section input[type="submit"] {
     padding: 10px;
@@ -201,9 +207,10 @@ footer {
 .button {
     float: left;
     padding: 10px 16px;
+    font-weight: 600;
     font-size: 16px;
     color: #fff;
-    background-color: #0779e4;
+    background-color: #10ad10;
     border-radius: 5px;
     text-decoration: none;
     margin-top: 15px;
@@ -211,7 +218,35 @@ footer {
 }
 
 .button:hover {
+    background-color: #0b6d0b;
+}
+
+.button-edit {
+    padding: 8px 19px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #0779e4;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button-edit:hover {
     background-color: #0251a5;
+}
+
+.button-delete {
+    padding: 8px 11px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #d81f1f;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button-delete:hover {
+    background-color: #bc1919;
 }
 
 table {
@@ -236,6 +271,6 @@ table th {
 }
 
 td img {
-    max-width: 120px;
-    max-height: 120px;
+    max-width: 150px;
+    max-height: 150px;
 }

@@ -64,16 +64,18 @@ $result = $conn->query($sql_select);
                 <td>{$row['post_text']}</td>
                         <td>{$formatted_date}</td>
                         <td>
-                        <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
-                        <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
+                        <a class='button-edit' href='edit_post.php?id={$row['post_id']}'>Edit</a>
+                        <br>
+                        <br>
+                        <a class='button-delete' href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
                         </td>
                         </tr>";
-                $number++;
-            }
-        } else {
-            echo "<tr><td colspan='8'>Tidak ada postingan yang ditemukan.</td></tr>";
-        }
-        ?>
+                        $number++;
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>Tidak ada postingan yang ditemukan.</td></tr>";
+                }
+                ?>
     </tbody>
 </table>
 <a href="add_post.php" class="button">Tambah Postingan</a>

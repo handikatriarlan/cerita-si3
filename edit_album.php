@@ -30,13 +30,14 @@ if (isset($_POST['update_album'])) {
 }
 ?>
 
-
-<h2>Edit Album</h2>
-<form method="POST" action="">
-    <label for="album_title">Nama Album:</label>
-    <input type="text" id="album_title" name="album_title" value="<?php echo $album['album_title']; ?>" required>
-    <input type="submit" name="update_album" value="Perbarui">
-</form>
+<div class="form-section">
+    <h2>Edit Album</h2>
+    <form method="POST" action="">
+        <label for="album_title">Nama Album:</label>
+        <input type="text" id="album_title" name="album_title" value="<?php echo $album['album_title']; ?>" required>
+        <input type="submit" name="update_album" value="Perbarui">
+    </form>
+</div>
 
 <?php
 $content = ob_get_clean();

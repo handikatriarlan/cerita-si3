@@ -66,8 +66,10 @@ if (isset($_GET['delete'])) {
                 <td>{$row['cat_name']}</td>
                 <td>{$row['cat_text']}</td>
                 <td>
-                <a href='edit_category.php?id={$row['cat_id']}'>Edit</a> |
-                <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>
+                <a class='button-edit' href='edit_category.php?id={$row['cat_id']}'>Edit</a>
+                <br>
+                <br>
+                <a class='button-delete' href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>
                 </td>
                 </tr>";
                 $number++;

@@ -33,14 +33,16 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<h2>Edit Kategori</h2>
-<form method="POST" action="">
-    <label for="cat_name">Nama Kategori:</label>
-    <input type="text" id="cat_name" name="cat_name" value="<?php echo $row['cat_name']; ?>" required>
-    <label for="cat_text">Deskripsi Kategori:</label>
-    <textarea id="cat_text" name="cat_text" required><?php echo $row['cat_text']; ?></textarea>
-    <input type="submit" name="submit" value="Perbarui">
-</form>
+<div class="form-section">
+    <h2>Edit Kategori</h2>
+    <form method="POST" action="">
+        <label for="cat_name">Nama Kategori:</label>
+        <input type="text" id="cat_name" name="cat_name" value="<?php echo $row['cat_name']; ?>" required>
+        <label for="cat_text">Deskripsi Kategori:</label>
+        <textarea id="cat_text" name="cat_text" required><?php echo $row['cat_text']; ?></textarea>
+        <input type="submit" name="submit" value="Perbarui">
+    </form>
+</div>
 
 <?php
 $content = ob_get_clean();
