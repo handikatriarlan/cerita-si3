@@ -35,7 +35,7 @@ $result = $conn->query($sql_select);
 <table>
     <thead>
         <tr>
-            <th>No</th>
+            <th>No.</th>
             <th>Gambar</th>
             <th>Kategori</th>
             <th>Slug</th>

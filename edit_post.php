@@ -43,14 +43,28 @@ if (isset($_POST['update_post'])) {
 
             if ($uploadOk == 1) {
                 if (move_uploaded_file($_FILES['photo_file']['tmp_name'], $target_file)) {
-                    $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title', photo_file = '$target_file' WHERE photo_id_post = $post_id";
+                    // Mengambil nama file saja untuk disimpan di database
+                    $photo_file_name = basename($_FILES['photo_file']['name']);
+                    $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title', photo_file = '$photo_file_name' WHERE photo_id_post = $post_id";
+                    if ($conn->query($sql_update_photo) !== TRUE) {
+                        echo "Error updating photo: " . $conn->error;
+                    }
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
                 }
             }
         } else {
+            // Jika tidak ada upload gambar baru, hanya perbarui judul foto
             $sql_update_photo = "UPDATE tb_photos SET photo_title = '$photo_title' WHERE photo_id_post = $post_id";
+            if ($conn->query($sql_update_photo) !== TRUE) {
+                echo "Error updating photo title: " . $conn->error;
+            }
         }
 
         header("Location: post.php");
+        exit(); // Pastikan untuk keluar dari skrip setelah header redirect
+    } else {
+        echo "Error updating post: " . $conn->error;
     }
 }
 ?>
