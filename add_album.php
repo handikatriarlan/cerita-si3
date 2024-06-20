@@ -39,7 +39,7 @@ $result_photos = $conn->query($sql_photos);
     <?php if (isset($error_message)) { ?>
         <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
     <?php } ?>
-    
+
     <form method="POST" action="" onsubmit="return validateAlbumForm()">
         <label for="album_id_photo">Foto:</label>
         <select id="album_id_photo" name="album_id_photo" required>
@@ -58,17 +58,6 @@ $result_photos = $conn->query($sql_photos);
         <input type="submit" name="submit" value="Tambahkan">
     </form>
 </div>
-
-<script>
-    function validateForm() {
-        var photo = document.getElementById("album_id_photo").value;
-        if (photo === "") {
-            alert("Harap pilih foto yang ingin dimasukkan ke album.");
-            return false;
-        }
-        return true;
-    }
-</script>
 
 <?php
 $content = ob_get_clean();

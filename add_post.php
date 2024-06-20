@@ -80,17 +80,6 @@ if (isset($_POST['submit'])) {
     </form>
 </div>
 
-<script>
-    function validateForm() {
-        var category = document.getElementById("post_id_cat").value;
-        if (category === "") {
-            alert("Harap pilih kategori.");
-            return false;
-        }
-        return true;
-    }
-</script>
-
 <?php
 $content = ob_get_clean();
 include "layouts/app.php";
