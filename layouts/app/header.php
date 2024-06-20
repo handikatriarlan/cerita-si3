@@ -1,4 +1,5 @@
 <header>
+    <img src="assets/images/cerita-si3-banner.png" alt="">
     <div id="branding">
         <a href="index.php">
             <h2>Cerita SI-3</h2>
