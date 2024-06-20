@@ -18,7 +18,6 @@ $result = $conn->query($sql);
 ?>
 
 <h2>Kegiatan Kelas SI-3</h2>
-
 <div class="posts-container">
     <?php
     if ($result->num_rows > 0) {

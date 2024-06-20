@@ -99,10 +99,10 @@ header li:hover {
 }
 
 .post span {
-    color: #5a5a5ac7;
-    font-weight: 600;
     font-size: 14px;
     float: right;
+    font-style: italic;
+    color: #666;
 }
 
 .post img {
@@ -110,6 +110,58 @@ header li:hover {
     height: auto;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.post-detail {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.post-detail h1 {
+    margin-left: 5px;
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.post-date {
+    margin-left: 5px;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    line-height: 1.8;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.photo {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 40px 0 40px 5px;
+}
+
+.photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.post-text {
+    margin: 0 5px;
+    font-size: 16px;
+    text-align: justify;
+    text-indent: 30px; 
 }
 
 .form-section {
