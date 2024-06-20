@@ -81,6 +81,9 @@ header li:hover {
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
 }
 
 .post a {
@@ -98,18 +101,18 @@ header li:hover {
     text-align: justify;
 }
 
-.post span {
-    font-size: 14px;
-    float: right;
-    font-style: italic;
-    color: #666;
-}
-
 .post img {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.posts-date {
+    font-size: 14px;
+    color: #666;
+    margin-top: auto;
+    text-align: right;
 }
 
 .post-detail {
@@ -126,11 +129,10 @@ header li:hover {
     font-size: 28px;
 }
 
-.post-date {
+.post-date,
+.post-category {
     margin-left: 5px;
-    font-style: italic;
     color: #666;
-    margin-bottom: 10px;
 }
 
 .post-content {
@@ -146,7 +148,7 @@ header li:hover {
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 40px 0 40px 5px;
+    margin: 30px 0 30px 5px;
 }
 
 .photo img {
@@ -161,7 +163,7 @@ header li:hover {
     margin: 0 5px;
     font-size: 16px;
     text-align: justify;
-    text-indent: 30px; 
+    text-indent: 30px;
 }
 
 .form-section {

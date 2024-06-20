@@ -26,7 +26,7 @@ $result = $conn->query($sql);
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><h3>" . $row['post_title'] . "</h3></a>";
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><img src='assets/images/" . $row['photo_file'] . "'></a>";
             echo "<p>" . substr($row['post_text'], 0, 100) . "...</p>";
-            echo "<span>Tanggal Upload: " . $row['post_date'] . "</span>";
+            echo "<span class='posts-date'>Tanggal Upload: " . $row['post_date'] . "</span>";
             echo "</div>";
         }
     } else {
@@ -34,6 +34,7 @@ $result = $conn->query($sql);
     }
     ?>
 </div>
+
 <?php
 $content = ob_get_clean();
 include "layouts/app.php";
