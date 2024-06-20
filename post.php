@@ -21,8 +21,6 @@ if (isset($_GET['delete'])) {
 
     if ($conn->query($sql_delete_album) === TRUE && $conn->query($sql_delete_photos) === TRUE && $conn->query($sql_delete_post) === TRUE) {
         header("Location: post.php");
-    } else {
-        $error_message = "Error deleting post and photos: " . $conn->error;
     }
 }
 
@@ -33,11 +31,8 @@ $sql_select = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_file
 $result = $conn->query($sql_select);
 ?>
 
-<h2>Daftar Postingan</h2>
+<h2>Postingan</h2>
 <a href="add_post.php" class="button">Tambah Postingan</a>
-<?php if (isset($error_message)) { ?>
-    <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
-<?php } ?>
 <table>
     <thead>
         <tr>
@@ -46,7 +41,7 @@ $result = $conn->query($sql_select);
             <th>Kategori</th>
             <th>Slug</th>
             <th>Judul</th>
-            <th>Teks</th>
+            <th>Deskripsi</th>
             <th>Tanggal</th>
             <th>Aksi</th>
         </tr>
@@ -58,28 +53,26 @@ $result = $conn->query($sql_select);
             while ($row = $result->fetch_assoc()) {
                 $formatted_date = date("d-m-Y", strtotime($row['post_date']));
                 echo "<tr>
-                                <td>{$number}.</td>
-                                <td>";
+                        <td>{$number}.</td>
+                        <td>";
                 if (!empty($row['photo_file'])) {
                     echo "<img src='assets/images/{$row['photo_file']}' style='max-width: 100px; max-height: 100px;' />";
-                } else {
-                    echo "No Image";
                 }
-                echo "</td>
-                                <td>{$row['cat_name']}</td>
-                                <td>{$row['post_slug']}</td>
-                                <td>{$row['post_title']}</td>
-                                <td>{$row['post_text']}</td>
-                                <td>{$formatted_date}</td>
-                                <td>
-                                    <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
-                                    <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
-                                </td>
-                            </tr>";
+                echo   "</td>
+                        <td>{$row['cat_name']}</td>
+                        <td>{$row['post_slug']}</td>
+                        <td>{$row['post_title']}</td>
+                        <td>{$row['post_text']}</td>
+                        <td>{$formatted_date}</td>
+                        <td>
+                            <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
+                            <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
+                        </td>
+                    </tr>";
                 $number++;
             }
         } else {
-            echo "<tr><td colspan='8'>No posts found</td></tr>";
+            echo "<tr><td colspan='8'>Tidak ada postingan yang ditemukan.</td></tr>";
         }
         ?>
     </tbody>

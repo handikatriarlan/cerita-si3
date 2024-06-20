@@ -26,9 +26,9 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<h2>Add Album</h2>
+<h2>Tambahkan Foto ke Album</h2>
 <form method="POST" action="">
-    <label for="album_id_photo">Photo:</label>
+    <label for="album_id_photo">Foto:</label>
     <select id="album_id_photo" name="album_id_photo" required>
         <?php
         $sql = "SELECT * FROM tb_photos";
@@ -39,13 +39,13 @@ if (isset($_POST['submit'])) {
                 echo "<option value='" . $row['photo_id'] . "'>" . $row['photo_title'] . "</option>";
             }
         } else {
-            echo "<option>No photos available</option>";
+            echo "<option>Tidak ada foto yang dipilih</option>";
         }
         ?>
     </select>
-    <label for="album_title">Title:</label>
+    <label for="album_title">Judul Foto:</label>
     <input type="text" id="album_title" name="album_title" required>
-    <input type="submit" name="submit" value="Add Album">
+    <input type="submit" name="submit" value="Tambahkan">
 </form>
 
 <?php

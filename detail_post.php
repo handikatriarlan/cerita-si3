@@ -34,14 +34,10 @@ if (isset($_GET['post_id'])) {
                 echo "</div>";
             }
             echo "</div>";
-        } else {
-            echo "<p>No photos available for this post.</p>";
         }
     } else {
-        echo "No post found.";
+        echo "Tidak ada postingan yang ditemukan.";
     }
-} else {
-    echo "No post selected.";
 }
 
 $content = ob_get_clean();

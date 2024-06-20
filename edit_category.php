@@ -18,13 +18,7 @@ if (isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-    } else {
-        echo "Category not found.";
-        exit();
     }
-} else {
-    echo "Category ID not specified.";
-    exit();
 }
 
 if (isset($_POST['submit'])) {
@@ -35,19 +29,17 @@ if (isset($_POST['submit'])) {
 
     if ($conn->query($sql) === TRUE) {
         header("Location: category.php");
-    } else {
-        echo "Error updating record: " . $conn->error;
     }
 }
 ?>
 
-<h2>Edit Category</h2>
+<h2>Edit Kategori</h2>
 <form method="POST" action="">
-    <label for="cat_name">Category Name:</label>
+    <label for="cat_name">Nama Kategori:</label>
     <input type="text" id="cat_name" name="cat_name" value="<?php echo $row['cat_name']; ?>" required>
-    <label for="cat_text">Category Description:</label>
+    <label for="cat_text">Deskripsi Kategori:</label>
     <textarea id="cat_text" name="cat_text" required><?php echo $row['cat_text']; ?></textarea>
-    <input type="submit" name="submit" value="Update Category">
+    <input type="submit" name="submit" value="Perbarui">
 </form>
 
 <?php

@@ -17,8 +17,6 @@ if (isset($_GET['delete'])) {
 
     if ($conn->query($sql) === TRUE) {
         header("Location: category.php");
-    } else {
-        echo "Error deleting record: " . $conn->error;
     }
 }
 ?>
@@ -29,9 +27,9 @@ if (isset($_GET['delete'])) {
     <thead>
         <tr>
             <th>No.</th>
-            <th>Category Name</th>
-            <th>Category Description</th>
-            <th>Actions</th>
+            <th>Nama Kategori</th>
+            <th>Deskripsi Kategori</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -48,13 +46,13 @@ if (isset($_GET['delete'])) {
                                 <td>{$row['cat_text']}</td>
                                 <td>
                                     <a href='edit_category.php?id={$row['cat_id']}'>Edit</a> |
-                                    <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Are you sure you want to delete this category?\")'>Hapus</a>
+                                    <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>
                                 </td>
                             </tr>";
                 $number++;
             }
         } else {
-            echo "<tr><td colspan='4'>No categories found</td></tr>";
+            echo "<tr><td colspan='4'>Tidak ada kategori yang ditemukan.</td></tr>";
         }
         ?>
     </tbody>

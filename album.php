@@ -23,8 +23,8 @@ $result = $conn->query($sql);
 ?>
 
 
-<h2>Daftar Album</h2>
-<a href="add_album.php" class="button">Tambah Album</a>
+<h2>Album</h2>
+<a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
 <table>
     <thead>
         <tr>
@@ -43,13 +43,13 @@ $result = $conn->query($sql);
                              <td>{$row['album_title']}</td>
                             <td>
                                 <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
-                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Are you sure you want to delete this album?\")'>Hapus</a>
+                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data album ini?\")'>Hapus</a>
                             </td>
                         </tr>";
                 $number++;
             }
         } else {
-            echo "<tr><td colspan='8'>No album found</td></tr>";
+            echo "<tr><td colspan='8'>Tidak ada album yang ditemukan.</td></tr>";
         }
         ?>
     </tbody>

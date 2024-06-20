@@ -16,13 +16,7 @@ if (isset($_GET['id'])) {
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $album = $result->fetch_assoc();
-    } else {
-        echo "Album not found";
-        exit();
     }
-} else {
-    echo "Invalid album ID";
-    exit();
 }
 
 if (isset($_POST['update_album'])) {
@@ -41,7 +35,7 @@ if (isset($_POST['update_album'])) {
 <form method="POST" action="">
     <label for="album_title">Nama Album:</label>
     <input type="text" id="album_title" name="album_title" value="<?php echo $album['album_title']; ?>" required>
-    <input type="submit" name="update_album" value="Update Album">
+    <input type="submit" name="update_album" value="Perbarui">
 </form>
 
 <?php
