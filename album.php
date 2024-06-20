@@ -43,7 +43,7 @@ $result = $conn->query($sql);
                              <td>{$row['album_title']}</td>
                             <td>
                                 <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
-                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus data album ini?\")'>Hapus</a>
+                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
                             </td>
                         </tr>";
                 $number++;
