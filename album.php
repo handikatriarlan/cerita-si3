@@ -18,7 +18,10 @@ if (isset($_GET['delete'])) {
     }
 }
 
-$sql = "SELECT * FROM tb_album";
+$sql = "SELECT tb_album.*, GROUP_CONCAT(tb_photos.photo_file SEPARATOR ', ') AS photos
+        FROM tb_album
+        LEFT JOIN tb_photos ON tb_album.album_id_photo = tb_photos.photo_id
+        GROUP BY tb_album.album_id";
 $result = $conn->query($sql);
 ?>
 
@@ -30,6 +33,7 @@ $result = $conn->query($sql);
         <tr>
             <th>No.</th>
             <th>Nama Album</th>
+            <th>Foto</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -39,17 +43,25 @@ $result = $conn->query($sql);
             $number = 1;
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
-                             <td>{$number}.</td>
-                             <td>{$row['album_title']}</td>
-                            <td>
-                                <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
-                                <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
-                            </td>
-                        </tr>";
+                        <td>{$number}.</td>
+                        <td>{$row['album_title']}</td>
+                        <td>";
+                if (!empty($row['photos'])) {
+                    $photos = explode(', ', $row['photos']);
+                    foreach ($photos as $photo) {
+                        echo "{$photo}";
+                    }
+                }
+                echo   "</td>
+                        <td>
+                            <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
+                            <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
+                        </td>
+                    </tr>";
                 $number++;
             }
         } else {
-            echo "<tr><td colspan='8'>Tidak ada album yang ditemukan.</td></tr>";
+            echo "<tr><td colspan='4'>Tidak ada album yang ditemukan.</td></tr>";
         }
         ?>
     </tbody>
