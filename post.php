@@ -13,52 +13,13 @@ include "config/connection.php";
 if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
 
-    $sql_select_album = "SELECT * FROM tb_album WHERE album_id_photo IN (SELECT photo_id FROM tb_photos WHERE photo_id_post = $post_id)";
-    $result_album = $conn->query($sql_select_album);
-    if ($result_album->num_rows > 0) {
-        while ($album_row = $result_album->fetch_assoc()) {
-            $album_id = $album_row['album_id'];
-            $sql_select_photos = "SELECT * FROM tb_photos WHERE photo_id_post = $post_id AND photo_id IN (SELECT album_id_photo FROM tb_album WHERE album_id = $album_id)";
-            $result_photos = $conn->query($sql_select_photos);
+    $sql_delete_album = "DELETE FROM tb_album WHERE album_id_photo IN (SELECT photo_id FROM tb_photos WHERE photo_id_post = $post_id)";
 
-            if ($result_photos->num_rows > 0) {
-                while ($photo_row = $result_photos->fetch_assoc()) {
-                    $photo_file = $photo_row['photo_file'];
-                    $target_dir = "assets/images/";
-                    $target_file = $target_dir . $photo_file;
-
-                    if (file_exists($target_file)) {
-                        unlink($target_file);
-                    }
-
-                    $sql_delete_photo = "DELETE FROM tb_photos WHERE photo_id = {$photo_row['photo_id']}";
-                    $conn->query($sql_delete_photo);
-                }
-            }
-            $sql_delete_album = "DELETE FROM tb_album WHERE album_id = $album_id";
-            $conn->query($sql_delete_album);
-        }
-    }
-
-    $sql_select_photos = "SELECT * FROM tb_photos WHERE photo_id_post = $post_id";
-    $result_photos = $conn->query($sql_select_photos);
-    if ($result_photos->num_rows > 0) {
-        while ($photo_row = $result_photos->fetch_assoc()) {
-            $photo_file = $photo_row['photo_file'];
-            $target_dir = "assets/images/";
-            $target_file = $target_dir . $photo_file;
-
-            if (file_exists($target_file)) {
-                unlink($target_file);
-            }
-
-            $sql_delete_photo = "DELETE FROM tb_photos WHERE photo_id = {$photo_row['photo_id']}";
-            $conn->query($sql_delete_photo);
-        }
-    }
+    $sql_delete_photos = "DELETE FROM tb_photos WHERE photo_id_post = $post_id";
 
     $sql_delete_post = "DELETE FROM tb_post WHERE post_id = $post_id";
-    if ($conn->query($sql_delete_post) === TRUE) {
+
+    if ($conn->query($sql_delete_album) === TRUE && $conn->query($sql_delete_photos) === TRUE && $conn->query($sql_delete_post) === TRUE) {
         header("Location: post.php");
     }
 }
