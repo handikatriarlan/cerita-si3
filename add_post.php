@@ -32,7 +32,9 @@ if (isset($_POST['submit'])) {
                 $target_file = $target_dir . basename($photo_file);
 
                 if (move_uploaded_file($_FILES['photo_file']['tmp_name'][$i], $target_file)) {
-                    $sql = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$post_id', '$post_title', '$photo_file')";
+                    $photo_title = $_POST['photo_title'];
+                    $sql_photo = "INSERT INTO tb_photos (photo_id_post, photo_title, photo_file) VALUES ('$post_id', '$photo_title', '$photo_file')";
+                    $conn->query($sql_photo);
                 }
             }
         }
@@ -70,7 +72,7 @@ if (isset($_POST['submit'])) {
     <label for="post_date">Tanggal:</label>
     <input type="date" id="post_date" name="post_date" required>
     <label for="photo_file">Foto:</label>
-    <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png, image/jpeg">
+    <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png" multiple required>
     <label for="photo_title">Judul Foto:</label>
     <input type="text" id="photo_title" name="photo_title" required>
     <input type="submit" name="submit" value="Tambahkan" onclick="return validateForm()">
@@ -86,7 +88,6 @@ if (isset($_POST['submit'])) {
         return true;
     }
 </script>
-
 
 <?php
 $content = ob_get_clean();
