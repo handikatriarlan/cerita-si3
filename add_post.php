@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
                 echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_name'] . "</option>";
             }
         } else {
-            echo "<option>Tidak ada kategori yang dipilih</option>";
+            echo "<option value=''>Tidak ada kategori yang tersedia</option>";
         }
         ?>
     </select>
@@ -73,8 +73,20 @@ if (isset($_POST['submit'])) {
     <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png, image/jpeg">
     <label for="photo_title">Judul Foto:</label>
     <input type="text" id="photo_title" name="photo_title" required>
-    <input type="submit" name="submit" value="Tambahkan">
+    <input type="submit" name="submit" value="Tambahkan" onclick="return validateForm()">
 </form>
+
+<script>
+    function validateForm() {
+        var category = document.getElementById("post_id_cat").value;
+        if (category === "") {
+            alert("Harap pilih kategori.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
 
 <?php
 $content = ob_get_clean();
