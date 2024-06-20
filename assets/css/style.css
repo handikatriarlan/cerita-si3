@@ -309,7 +309,7 @@ td img {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: 100vh;
 }
 
 .login-form {
@@ -318,7 +318,7 @@ td img {
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
 }
 
 .login-form h2 {
@@ -341,7 +341,7 @@ td img {
 
 .login-form input[type="text"],
 .login-form input[type="password"] {
-    padding: 12px;
+    padding: 8px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -349,7 +349,8 @@ td img {
 }
 
 .login-form input[type="submit"] {
-    padding: 14px;
+    margin-top: 5px;
+    padding: 12px;
     background-color: #0779e4;
     color: #fff;
     border: none;
