@@ -46,37 +46,39 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<h2>Tambah Postingan</h2>
-<form method="POST" action="" enctype="multipart/form-data">
-    <label for="post_id_cat">Kategori:</label>
-    <select id="post_id_cat" name="post_id_cat" required>
-        <?php
-        $sql = "SELECT * FROM tb_category";
-        $result = $conn->query($sql);
+<div class="form-section">
+    <h2>Tambah Postingan</h2>
+    <form method="POST" action="" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <label for="post_id_cat">Kategori:</label>
+        <select id="post_id_cat" name="post_id_cat" required>
+            <?php
+            $sql = "SELECT * FROM tb_category";
+            $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_name'] . "</option>";
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['cat_id'] . "'>" . $row['cat_name'] . "</option>";
+                }
+            } else {
+                echo "<option value=''>Tidak ada kategori yang tersedia</option>";
             }
-        } else {
-            echo "<option value=''>Tidak ada kategori yang tersedia</option>";
-        }
-        ?>
-    </select>
-    <label for="post_slug">Slug:</label>
-    <input type="text" id="post_slug" name="post_slug" required>
-    <label for="post_title">Judul:</label>
-    <input type="text" id="post_title" name="post_title" required>
-    <label for="post_text">Deskripsi:</label>
-    <textarea id="post_text" name="post_text" required></textarea>
-    <label for="post_date">Tanggal:</label>
-    <input type="date" id="post_date" name="post_date" required>
-    <label for="photo_file">Foto:</label>
-    <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png" multiple required>
-    <label for="photo_title">Judul Foto:</label>
-    <input type="text" id="photo_title" name="photo_title" required>
-    <input type="submit" name="submit" value="Tambahkan" onclick="return validateForm()">
-</form>
+            ?>
+        </select>
+        <label for="post_slug">Slug:</label>
+        <input type="text" id="post_slug" name="post_slug" required>
+        <label for="post_title">Judul:</label>
+        <input type="text" id="post_title" name="post_title" required>
+        <label for="post_text">Deskripsi:</label>
+        <textarea id="post_text" name="post_text" required></textarea>
+        <label for="post_date">Tanggal:</label>
+        <input type="date" id="post_date" name="post_date" required>
+        <label for="photo_file">Foto:</label>
+        <input type="file" id="photo_file" name="photo_file[]" accept="image/jpeg, image/png" multiple required>
+        <label for="photo_title">Judul Foto:</label>
+        <input type="text" id="photo_title" name="photo_title" required>
+        <input type="submit" name="submit" value="Tambahkan">
+    </form>
+</div>
 
 <script>
     function validateForm() {

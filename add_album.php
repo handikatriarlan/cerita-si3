@@ -25,8 +25,6 @@ if (isset($_POST['submit'])) {
         if ($conn->query($sql_insert) === TRUE) {
             header("Location: album.php");
             exit();
-        } else {
-            $error_message = "Error: " . $conn->error;
         }
     }
 }
@@ -35,28 +33,27 @@ $sql_photos = "SELECT * FROM tb_photos WHERE photo_id NOT IN (SELECT album_id_ph
 $result_photos = $conn->query($sql_photos);
 ?>
 
-<h2>Tambahkan Foto ke Album</h2>
-<form method="POST" action="">
-    <label for="album_id_photo">Foto:</label>
-    <select id="album_id_photo" name="album_id_photo" required>
-        <?php
-        if ($result_photos->num_rows > 0) {
-            while ($row = $result_photos->fetch_assoc()) {
-                echo "<option value='" . $row['photo_id'] . "'>" . $row['photo_title'] . "</option>";
+<div class="form-section">
+    <h2>Tambahkan Foto ke Album</h2>
+    <form method="POST" action="" onsubmit="return validateAlbumForm()">
+        <label for="album_id_photo">Foto:</label>
+        <select id="album_id_photo" name="album_id_photo" required>
+            <?php
+            if ($result_photos->num_rows > 0) {
+                while ($row = $result_photos->fetch_assoc()) {
+                    echo "<option value='" . $row['photo_id'] . "'>" . $row['photo_title'] . "</option>";
+                }
+            } else {
+                echo "<option value=''>Tidak ada foto yang tersedia untuk ditambahkan ke album.</option>";
             }
-        } else {
-            echo "<option value=''>Tidak ada foto yang tersedia untuk ditambahkan ke album.</option>";
-        }
-        ?>
-    </select>
-    <label for="album_title">Judul Album:</label>
-    <input type="text" id="album_title" name="album_title" required>
-    <input type="submit" name="submit" value="Tambahkan" onclick="return validateForm()">
-</form>
+            ?>
+        </select>
+        <label for="album_title">Judul Album:</label>
+        <input type="text" id="album_title" name="album_title" required>
+        <input type="submit" name="submit" value="Tambahkan">
+    </form>
+</div>
 
-<?php if (isset($error_message)) { ?>
-    <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
-<?php } ?>
 
 <script>
     function validateForm() {

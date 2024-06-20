@@ -32,7 +32,6 @@ $result = $conn->query($sql_select);
 ?>
 
 <h2>Postingan</h2>
-<a href="add_post.php" class="button">Tambah Postingan</a>
 <table>
     <thead>
         <tr>
@@ -53,22 +52,22 @@ $result = $conn->query($sql_select);
             while ($row = $result->fetch_assoc()) {
                 $formatted_date = date("d-m-Y", strtotime($row['post_date']));
                 echo "<tr>
-                        <td>{$number}.</td>
-                        <td>";
+                <td>{$number}.</td>
+                <td>";
                 if (!empty($row['photo_file'])) {
-                    echo "<img src='assets/images/{$row['photo_file']}' style='max-width: 100px; max-height: 100px;' />";
+                    echo "<img src='assets/images/{$row['photo_file']}' />";
                 }
                 echo   "</td>
-                        <td>{$row['cat_name']}</td>
-                        <td>{$row['post_slug']}</td>
-                        <td>{$row['post_title']}</td>
-                        <td>{$row['post_text']}</td>
+                <td>{$row['cat_name']}</td>
+                <td>{$row['post_slug']}</td>
+                <td>{$row['post_title']}</td>
+                <td>{$row['post_text']}</td>
                         <td>{$formatted_date}</td>
                         <td>
-                            <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
-                            <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
+                        <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
+                        <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
                         </td>
-                    </tr>";
+                        </tr>";
                 $number++;
             }
         } else {
@@ -77,6 +76,7 @@ $result = $conn->query($sql_select);
         ?>
     </tbody>
 </table>
+<a href="add_post.php" class="button">Tambah Postingan</a>
 
 <?php
 $content = ob_get_clean();

@@ -41,7 +41,6 @@ if (isset($_GET['delete'])) {
 ?>
 
 <h2>Kategori</h2>
-<a href="add_category.php" class="button">Tambah Kategori</a>
 <?php if (isset($error_message)) { ?>
     <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
 <?php } ?>
@@ -63,14 +62,14 @@ if (isset($_GET['delete'])) {
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>{$number}.</td>
-                        <td>{$row['cat_name']}</td>
-                        <td>{$row['cat_text']}</td>
-                        <td>
-                            <a href='edit_category.php?id={$row['cat_id']}'>Edit</a> |
-                            <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>
-                        </td>
-                      </tr>";
+                <td>{$number}.</td>
+                <td>{$row['cat_name']}</td>
+                <td>{$row['cat_text']}</td>
+                <td>
+                <a href='edit_category.php?id={$row['cat_id']}'>Edit</a> |
+                <a href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>
+                </td>
+                </tr>";
                 $number++;
             }
         } else {
@@ -79,6 +78,7 @@ if (isset($_GET['delete'])) {
         ?>
     </tbody>
 </table>
+<a href="add_category.php" class="button">Tambah Kategori</a>
 
 <?php
 $content = ob_get_clean();

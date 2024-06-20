@@ -27,13 +27,12 @@ $result = $conn->query($sql);
 
 
 <h2>Album</h2>
-<a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
 <table>
     <thead>
         <tr>
             <th>No.</th>
             <th>Nama Album</th>
-            <th>Foto</th>
+            <th>Nama Foto/File</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -43,9 +42,9 @@ $result = $conn->query($sql);
             $number = 1;
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <td>{$number}.</td>
-                        <td>{$row['album_title']}</td>
-                        <td>";
+                <td>{$number}.</td>
+                <td>{$row['album_title']}</td>
+                <td>";
                 if (!empty($row['photos'])) {
                     $photos = explode(', ', $row['photos']);
                     foreach ($photos as $photo) {
@@ -54,10 +53,10 @@ $result = $conn->query($sql);
                 }
                 echo   "</td>
                         <td>
-                            <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
+                        <a href='edit_album.php?id={$row['album_id']}'>Edit</a> |
                             <a href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
                         </td>
-                    </tr>";
+                        </tr>";
                 $number++;
             }
         } else {
@@ -66,6 +65,7 @@ $result = $conn->query($sql);
         ?>
     </tbody>
 </table>
+<a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
 
 <?php
 $content = ob_get_clean();
