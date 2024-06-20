@@ -1,4 +1,7 @@
 <?php
+$title = "Cerita SI-3 - Edit Album";
+ob_start();
+
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
@@ -33,48 +36,15 @@ if (isset($_POST['update_album'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Album - Cerita SI-3</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-</head>
+<h2>Edit Album</h2>
+<form method="POST" action="">
+    <label for="album_title">Nama Album:</label>
+    <input type="text" id="album_title" name="album_title" value="<?php echo $album['album_title']; ?>" required>
+    <input type="submit" name="update_album" value="Update Album">
+</form>
 
-<body>
-    <header>
-        <div id="branding">
-            <a href="index.php">
-                <h2>Cerita SI-3</h2>
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.php">Beranda</a></li>
-                <li><a href="post.php">Postingan</a></li>
-                <li><a href="category.php">Kategori</a></li>
-                <li><a href="album.php">Album</a></li>
-                <li><a href="logout.php">Keluar</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <div class="container">
-            <h2>Edit Album</h2>
-            <form method="POST" action="">
-                <label for="album_title">Nama Album:</label>
-                <input type="text" id="album_title" name="album_title" value="<?php echo $album['album_title']; ?>" required>
-                <input type="submit" name="update_album" value="Update Album">
-            </form>
-        </div>
-    </main>
-
-    <footer>
-        <p>SI-3 &copy; 2024</p>
-    </footer>
-</body>
-
-</html>
+<?php
+$content = ob_get_clean();
+include "layouts/app.php";
+?>

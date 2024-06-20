@@ -1,5 +1,5 @@
 <?php
-$title = "Cerita SI-3 - Beranda";
+$title = "Cerita SI-3 - Tambah Album";
 ob_start();
 
 session_start();
