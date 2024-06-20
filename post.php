@@ -12,9 +12,17 @@ include "config/connection.php";
 
 if (isset($_GET['delete'])) {
     $post_id = $_GET['delete'];
-    $sql_delete = "DELETE FROM tb_post WHERE post_id = $post_id";
-    if ($conn->query($sql_delete) === TRUE) {
+
+    $sql_delete_album = "DELETE FROM tb_album WHERE album_id_photo IN (SELECT photo_id FROM tb_photos WHERE photo_id_post = $post_id)";
+
+    $sql_delete_photos = "DELETE FROM tb_photos WHERE photo_id_post = $post_id";
+
+    $sql_delete_post = "DELETE FROM tb_post WHERE post_id = $post_id";
+
+    if ($conn->query($sql_delete_album) === TRUE && $conn->query($sql_delete_photos) === TRUE && $conn->query($sql_delete_post) === TRUE) {
         header("Location: post.php");
+    } else {
+        $error_message = "Error deleting post and photos: " . $conn->error;
     }
 }
 
@@ -23,12 +31,13 @@ $sql_select = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_file
                JOIN tb_category ON tb_post.post_id_cat = tb_category.cat_id 
                LEFT JOIN tb_photos ON tb_post.post_id = tb_photos.photo_id_post";
 $result = $conn->query($sql_select);
-
 ?>
-
 
 <h2>Daftar Postingan</h2>
 <a href="add_post.php" class="button">Tambah Postingan</a>
+<?php if (isset($error_message)) { ?>
+    <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
+<?php } ?>
 <table>
     <thead>
         <tr>
@@ -64,7 +73,7 @@ $result = $conn->query($sql_select);
                                 <td>{$formatted_date}</td>
                                 <td>
                                     <a href='edit_post.php?id={$row['post_id']}'>Edit</a> |
-                                    <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Are you sure you want to delete this post?\")'>Hapus</a>
+                                    <a href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
                                 </td>
                             </tr>";
                 $number++;
