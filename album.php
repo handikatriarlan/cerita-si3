@@ -25,8 +25,10 @@ $sql = "SELECT tb_album.*, GROUP_CONCAT(tb_photos.photo_file SEPARATOR ', ') AS 
 $result = $conn->query($sql);
 ?>
 
-
-<h2>Album</h2>
+<div class="menu-title">
+    <h2>Album</h2>
+    <a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
+</div>
 <table>
     <thead>
         <tr>
@@ -67,7 +69,6 @@ $result = $conn->query($sql);
         ?>
     </tbody>
 </table>
-<a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
 
 <?php
 $content = ob_get_clean();

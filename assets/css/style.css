@@ -66,6 +66,7 @@ header li:hover {
     margin: auto;
     padding: 20px;
     flex: 1;
+    margin-top: 20px;
 }
 
 .posts-container {
@@ -231,8 +232,13 @@ header li:hover {
     background-color: #008600;
 }
 
+.menu-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .button {
-    float: left;
     padding: 10px 16px;
     font-weight: 600;
     font-size: 16px;
@@ -240,13 +246,13 @@ header li:hover {
     background-color: #00a700;
     border-radius: 5px;
     text-decoration: none;
-    margin-top: 15px;
     transition: background-color 0.3s ease;
 }
 
 .button:hover {
     background-color: #008600;
 }
+
 
 .button-edit {
     padding: 8px 19px;

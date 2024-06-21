@@ -34,16 +34,14 @@ if (isset($_GET['delete'])) {
     $sql_delete_category = "DELETE FROM tb_category WHERE cat_id = $cat_id";
     if ($conn->query($sql_delete_category) === TRUE) {
         header("Location: category.php");
-    } else {
-        $error_message = "Error deleting category: " . $conn->error;
     }
 }
 ?>
 
-<h2>Kategori</h2>
-<?php if (isset($error_message)) { ?>
-    <p style="color: red; text-align: center; margin: 10px 0;"><?php echo $error_message ?></p>
-<?php } ?>
+<div class="menu-title">
+    <h2>Kategori</h2>
+    <a href="add_category.php" class="button">Tambah Kategori</a>
+</div>
 <table class="category-table">
     <thead>
         <tr>
@@ -80,7 +78,6 @@ if (isset($_GET['delete'])) {
         ?>
     </tbody>
 </table>
-<a href="add_category.php" class="button">Tambah Kategori</a>
 
 <?php
 $content = ob_get_clean();

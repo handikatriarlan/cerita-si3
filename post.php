@@ -31,7 +31,10 @@ $sql_select = "SELECT tb_post.*, tb_category.cat_name, tb_photos.photo_file
 $result = $conn->query($sql_select);
 ?>
 
-<h2>Postingan</h2>
+<div class="menu-title">
+    <h2>Postingan</h2>
+    <a href="add_post.php" class="button">Tambah Postingan</a>
+</div>
 <table>
     <thead>
         <tr>
@@ -70,15 +73,14 @@ $result = $conn->query($sql_select);
                         <a class='button-delete' href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
                         </td>
                         </tr>";
-                        $number++;
-                    }
-                } else {
-                    echo "<tr><td colspan='8'>Tidak ada postingan yang ditemukan.</td></tr>";
-                }
-                ?>
+                $number++;
+            }
+        } else {
+            echo "<tr><td colspan='8'>Tidak ada postingan yang ditemukan.</td></tr>";
+        }
+        ?>
     </tbody>
 </table>
-<a href="add_post.php" class="button">Tambah Postingan</a>
 
 <?php
 $content = ob_get_clean();
