@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: auth/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -33,7 +33,7 @@ $result = $conn->query($sql_select);
 
 <div class="menu-title">
     <h2>Postingan</h2>
-    <a href="controllers/add_post.php" class="button">Tambah Postingan</a>
+    <a href="add_post.php" class="button">Tambah Postingan</a>
 </div>
 <table>
     <thead>
@@ -67,7 +67,7 @@ $result = $conn->query($sql_select);
                     <td>" . substr($row['post_text'], 0, 157) . "...</td>
                     <td>{$formatted_date}</td>
                     <td>
-                    <a class='button-edit' href='controllers/edit_post.php?id={$row['post_id']}'>Edit</a>
+                    <a class='button-edit' href='edit_post.php?id={$row['post_id']}'>Edit</a>
                     <br>
                     <br>
                     <a class='button-delete' href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>

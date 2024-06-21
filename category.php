@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: auth/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -40,7 +40,7 @@ if (isset($_GET['delete'])) {
 
 <div class="menu-title">
     <h2>Kategori</h2>
-    <a href="controllers/add_category.php" class="button">Tambah Kategori</a>
+    <a href="add_category.php" class="button">Tambah Kategori</a>
 </div>
 <table class="category-table">
     <thead>
@@ -64,7 +64,7 @@ if (isset($_GET['delete'])) {
                 <td>{$row['cat_name']}</td>
                 <td>{$row['cat_text']}</td>
                 <td>
-                <a class='button-edit' href='controllers/edit_category.php?id={$row['cat_id']}'>Edit</a>
+                <a class='button-edit' href='edit_category.php?id={$row['cat_id']}'>Edit</a>
                 <br>
                 <br>
                 <a class='button-delete' href='category.php?delete={$row['cat_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori ini juga berarti menghapus seluruh data postingan apabila postingan tersebut terhubung dengan kategori ini.\")'>Hapus</a>

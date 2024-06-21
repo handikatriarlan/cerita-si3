@@ -10,9 +10,9 @@
                     <li><a href="post.php">Postingan</a></li>
                     <li><a href="category.php">Kategori</a></li>
                     <li><a href="album.php">Album</a></li>
-                    <li><a href="auth/logout.php">Keluar</a></li>
+                    <li><a href="logout.php">Keluar</a></li>
                 <?php } else { ?>
-                    <li><a href="auth/login.php">Masuk</a></li>
+                    <li><a href="login.php">Masuk</a></li>
                 <?php } ?>
             </ul>
         </nav>
