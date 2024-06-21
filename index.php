@@ -20,7 +20,7 @@ $result = $conn->query($sql);
             echo "<div class='post'>";
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><h3>" . $row['post_title'] . "</h3></a>";
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><img src='assets/images/" . $row['photo_file'] . "'></a>";
-            echo "<p>" . substr($row['post_text'], 0, 100) . "...</p>";
+            echo "<p>" . substr($row['post_text'], 0, 157) . "...</p>";
             echo "<span class='posts-date'>Tanggal Upload: " . $row['post_date'] . "</span>";
             echo "</div>";
         }

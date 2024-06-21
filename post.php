@@ -55,24 +55,24 @@ $result = $conn->query($sql_select);
             while ($row = $result->fetch_assoc()) {
                 $formatted_date = date("d-m-Y", strtotime($row['post_date']));
                 echo "<tr>
-                <td>{$number}.</td>
-                <td>";
-                if (!empty($row['photo_file'])) {
-                    echo "<img src='assets/images/{$row['photo_file']}' />";
-                }
-                echo   "</td>
-                <td>{$row['cat_name']}</td>
-                <td>{$row['post_slug']}</td>
-                <td>{$row['post_title']}</td>
-                <td>{$row['post_text']}</td>
-                        <td>{$formatted_date}</td>
-                        <td>
-                        <a class='button-edit' href='edit_post.php?id={$row['post_id']}'>Edit</a>
-                        <br>
-                        <br>
-                        <a class='button-delete' href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
-                        </td>
-                        </tr>";
+                    <td>{$number}.</td>
+                    <td>";
+                    if (!empty($row['photo_file'])) {
+                        echo "<img src='assets/images/{$row['photo_file']}' />";
+                    }
+                    echo   "</td>
+                    <td>{$row['cat_name']}</td>
+                    <td>{$row['post_slug']}</td>
+                    <td>{$row['post_title']}</td>
+                    <td>" . substr($row['post_text'], 0, 157) . "...</td>
+                    <td>{$formatted_date}</td>
+                    <td>
+                    <a class='button-edit' href='edit_post.php?id={$row['post_id']}'>Edit</a>
+                    <br>
+                    <br>
+                    <a class='button-delete' href='post.php?delete={$row['post_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus postingan ini? Menghapus postingan ini juga berarti menghapus album dan foto yang terdapat di dalamnya.\")'>Hapus</a>
+                    </td>
+                </tr>";
                 $number++;
             }
         } else {
