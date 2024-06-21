@@ -19,8 +19,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    border-bottom: 3px solid #000000;
+    background-color: #171717;
+    border-bottom: 3px solid #171717;
 }
 
 header img {
@@ -52,6 +52,7 @@ header a {
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
+    font-weight: 600;
     padding: 0 15px;
     transition: background-color 0.3s ease;
 }
@@ -368,8 +369,18 @@ td img {
 
 footer {
     margin-top: 30px;
-    background-color: #333;
+    background-color: #171717;
     color: #fff;
     text-align: center;
     padding: 15px 0;
+    font-size: 14px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+footer a:hover {
+    color: #c1c1c1;
 }
