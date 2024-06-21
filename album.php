@@ -4,7 +4,7 @@ ob_start();
 
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: auth/login.php");
     exit();
 }
 
@@ -27,7 +27,7 @@ $result = $conn->query($sql);
 
 <div class="menu-title">
     <h2>Album</h2>
-    <a href="add_album.php" class="button">Tambahkan Foto ke Album</a>
+    <a href="controllers/add_album.php" class="button">Tambahkan Foto ke Album</a>
 </div>
 <table>
     <thead>
@@ -55,7 +55,7 @@ $result = $conn->query($sql);
                 }
                 echo   "</td>
                         <td>
-                        <a class='button-edit' href='edit_album.php?id={$row['album_id']}'>Edit</a>
+                        <a class='button-edit' href='controllers/edit_album.php?id={$row['album_id']}'>Edit</a>
                         <br>
                         <br>
                         <a class='button-delete' href='album.php?delete={$row['album_id']}' onclick='return confirm(\"Apakah Anda yakin ingin menghapus album ini?\")'>Hapus</a>
