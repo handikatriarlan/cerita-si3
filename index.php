@@ -17,11 +17,12 @@ $result = $conn->query($sql);
     <?php
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            $formatted_date = date("d-m-Y", strtotime($row['post_date']));
             echo "<div class='post'>";
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><h3>" . $row['post_title'] . "</h3></a>";
             echo "<a href='detail_post.php?post_id=" . $row['post_id'] . "'><img src='assets/images/" . $row['photo_file'] . "'></a>";
             echo "<p>" . substr($row['post_text'], 0, 157) . "...</p>";
-            echo "<span class='posts-date'>Tanggal Upload: " . $row['post_date'] . "</span>";
+            echo "<span class='posts-date'>Tanggal Upload: " . $formatted_date . "</span>";
             echo "</div>";
         }
     } else {

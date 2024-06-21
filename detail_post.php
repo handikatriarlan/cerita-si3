@@ -16,29 +16,30 @@ if ($post_id) {
     if ($result->num_rows > 0) {
         $post = $result->fetch_assoc();
         $title = "Cerita SI-3 - " . $post['post_title'];
+        $formatted_date = date("d-m-Y", strtotime($post['post_date']));
 ?>
 
-<article class="post-detail">
-    <h1><?php echo $post['post_title']; ?></h1>
-    <p class="post-category">Kategori: <?php echo $post['cat_name']; ?></p>
-    <p class="post-date">Tanggal Upload: <?php echo $post['post_date']; ?></p>
-    <div class="post-content">
-        <?php
-        $photo_sql = "SELECT * FROM tb_photos WHERE photo_id_post='$post_id'";
-        $photo_result = $conn->query($photo_sql);
+        <article class="post-detail">
+            <h1><?php echo $post['post_title']; ?></h1>
+            <p class="post-category">Kategori: <?php echo $post['cat_name']; ?></p>
+            <p class="post-date">Tanggal Upload: <?php echo $formatted_date; ?></p>
+            <div class="post-content">
+                <?php
+                $photo_sql = "SELECT * FROM tb_photos WHERE photo_id_post='$post_id'";
+                $photo_result = $conn->query($photo_sql);
 
-        if ($photo_result->num_rows > 0) {
-            $photo = $photo_result->fetch_assoc();
-            echo "<div class='photo'>";
-            echo "<img src='assets/images/" . $photo['photo_file'] . "' alt='" . $photo['photo_title'] . "'>";
-            echo "</div>";
-        }
-        ?>
-        <div class="post-text">
-            <?php echo $post['post_text']; ?>
-        </div>
-    </div>
-</article>
+                if ($photo_result->num_rows > 0) {
+                    $photo = $photo_result->fetch_assoc();
+                    echo "<div class='photo'>";
+                    echo "<img src='assets/images/" . $photo['photo_file'] . "' alt='" . $photo['photo_title'] . "'>";
+                    echo "</div>";
+                }
+                ?>
+                <div class="post-text">
+                    <?php echo $post['post_text']; ?>
+                </div>
+            </div>
+        </article>
 
 <?php
     } else {
