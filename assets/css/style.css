@@ -26,9 +26,8 @@ header {
 header img {
     margin-top: -20px;
     display: block;
-    top: 0;
     width: 100%;
-    height: 200px;
+    height: auto;
 }
 
 header nav {
@@ -383,4 +382,148 @@ footer a {
 
 footer a:hover {
     color: #c1c1c1;
+}
+
+@media (max-width: 1024px) {
+    header nav {
+        padding: 10px;
+    }
+
+    header a {
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .posts-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .post h3 {
+        font-size: 18px;
+    }
+
+    .post p {
+        font-size: 14px;
+    }
+
+    .post-detail h1 {
+        font-size: 24px;
+    }
+
+    .post-content {
+        font-size: 16px;
+    }
+
+    .form-section {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .login-form {
+        padding: 20px;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    header a {
+        font-size: 10px;
+        padding: 0 5px;
+    }
+
+    .posts-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .post h3 {
+        font-size: 16px;
+    }
+
+    .post p {
+        font-size: 12px;
+    }
+
+    .post-detail h1 {
+        font-size: 20px;
+    }
+
+    .post-content {
+        font-size: 14px;
+    }
+
+    .form-section {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .login-form {
+        padding: 15px;
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    header nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header a {
+        font-size: 8px;
+        padding: 5px 0;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    .posts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .post h3 {
+        font-size: 14px;
+    }
+
+    .post p {
+        font-size: 10px;
+    }
+
+    .post-detail h1 {
+        font-size: 18px;
+    }
+
+    .post-content {
+        font-size: 12px;
+    }
+
+    .form-section {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .login-form {
+        padding: 10px;
+    }
+
+    table th,
+    table td {
+        padding: 6px;
+        font-size: 10px;
+    }
 }
