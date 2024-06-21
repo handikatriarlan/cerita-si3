@@ -1,7 +1,7 @@
 <header>
     <div class="header-container">
         <a href="index.php" class="logo">
-            <img src="assets/images/cerita-si3-banner.png" alt="Cerita SI-3">
+            <img src="assets/images/banner.png" alt="Cerita SI-3">
         </a>
         <nav>
             <ul>
