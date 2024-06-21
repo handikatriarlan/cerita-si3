@@ -2,12 +2,6 @@
 $title = "Cerita SI-3 - Beranda";
 ob_start();
 
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit();
-}
-
 include "config/connection.php";
 
 $sql = "SELECT p.*, ph.photo_file

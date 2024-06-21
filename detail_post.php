@@ -2,12 +2,6 @@
 $title = "Cerita SI-3 - Detail Postingan";
 ob_start();
 
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit();
-}
-
 include "config/connection.php";
 
 $post_id = isset($_GET['post_id']) ? $_GET['post_id'] : null;

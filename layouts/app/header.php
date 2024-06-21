@@ -6,10 +6,14 @@
         <nav>
             <ul>
                 <li><a href="index.php">Beranda</a></li>
-                <li><a href="post.php">Postingan</a></li>
-                <li><a href="category.php">Kategori</a></li>
-                <li><a href="album.php">Album</a></li>
-                <li><a href="logout.php">Keluar</a></li>
+                <?php if (isset($_SESSION['user'])) { ?>
+                    <li><a href="post.php">Postingan</a></li>
+                    <li><a href="category.php">Kategori</a></li>
+                    <li><a href="album.php">Album</a></li>
+                    <li><a href="logout.php">Keluar</a></li>
+                <?php } else { ?>
+                    <li><a href="login.php">Masuk</a></li>
+                <?php } ?>
             </ul>
         </nav>
     </div>
