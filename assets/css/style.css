@@ -43,7 +43,6 @@ header ul {
 
 header li {
     display: inline;
-    padding: 10px 0;
 }
 
 header a {
@@ -52,12 +51,14 @@ header a {
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
-    padding: 0 15px;
-    transition: background-color 0.3s ease;
+    padding: 10px 15px;
+    
 }
 
-header li:hover {
-    background-color: #555;
+header a:hover {
+    background-color: #3f3f3f;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
 }
 
 .container {
