@@ -11,8 +11,9 @@ if (!isset($_SESSION['user'])) {
 include "config/connection.php";
 
 $sql = "SELECT p.*, ph.photo_file
-                FROM tb_post p
-                LEFT JOIN tb_photos ph ON p.post_id = ph.photo_id_post";
+        FROM tb_post p
+        LEFT JOIN tb_photos ph ON p.post_id = ph.photo_id_post
+        ORDER BY p.post_date ASC";
 
 $result = $conn->query($sql);
 ?>
